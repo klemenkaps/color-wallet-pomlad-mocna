@@ -1,0 +1,333 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --page-padding: clamp(10px, 2vw, 16px);
+  --grid-gap: clamp(8px, 1.5vw, 14px);
+  --hero-height: clamp(120px, 18dvh, 178px);
+  --logo-side-width: clamp(81px, 16vw, 129px);
+  --tint-logo-height: clamp(48px, 8.3dvh, 73px);
+  --swatch-radius: clamp(12px, 2vw, 18px);
+  --hero-logo-scale: 1.14;
+  --home-side-logo-inset: clamp(14px, 3vw, 22px);
+  --close-button-size: clamp(46px, 6.4dvh, 58px);
+  --close-button-icon-size: clamp(28px, 4.2dvh, 36px);
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: sans-serif;
+  background: #111;
+  color: white;
+  text-align: center;
+  overflow: hidden;
+}
+
+#appContent {
+  position: relative;
+  width: min(100vw, 480px);
+  height: 100dvh;
+  margin: 0 auto;
+  padding: var(--page-padding);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(10px, 1.8dvh, 16px);
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: var(--logo-side-width) 1fr var(--logo-side-width);
+  align-items: center;
+  gap: clamp(12px, 2vw, 18px);
+  min-height: var(--hero-height);
+  transform: scale(var(--hero-logo-scale));
+  transform-origin: top center;
+}
+
+.hero-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+}
+
+.logo-spin-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.side-logo {
+  width: 100%;
+  max-height: var(--tint-logo-height);
+  object-fit: contain;
+  height: auto;
+  align-self: center;
+  transform: none;
+}
+
+.side-logo-left {
+  justify-self: start;
+  margin-left: var(--home-side-logo-inset);
+  visibility: hidden;
+}
+
+.side-logo-right {
+  justify-self: end;
+  transform: scale(1.1);
+  transform-origin: center;
+  margin-top: 4px;
+}
+
+.layout-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-right: var(--home-side-logo-inset);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  transform: none;
+}
+
+.subtitle {
+  font-size: clamp(11px, 1.8dvh, 14px);
+  opacity: 0.9;
+  margin: 0;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.subtitle-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  margin-top: clamp(10px, 1.6dvh, 14px);
+}
+
+.subtitle-note {
+  margin-top: 0;
+}
+
+.client-logo {
+  display: block;
+  height: clamp(81px, 12.75dvh, 120px);
+  width: auto;
+  margin: 0 auto;
+  transform-origin: center;
+}
+
+.client-logo.is-spinning {
+  animation: zima-logo-spin 1.08s cubic-bezier(0.48, 0, 0.16, 1);
+}
+
+@keyframes zima-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--grid-gap);
+  justify-content: center;
+  align-content: start;
+  flex: 1;
+  min-height: 0;
+  margin-top: 20px;
+}
+
+.swatch {
+  width: min(
+    calc((100vw - (2 * var(--page-padding)) - (4 * var(--grid-gap))) / 5),
+    calc((100dvh - (2 * var(--page-padding)) - var(--hero-height) - (7 * var(--grid-gap)) - clamp(10px, 1.8dvh, 16px)) / 8)
+  );
+  aspect-ratio: 1 / 1;
+  border-radius: var(--swatch-radius);
+  cursor: pointer;
+}
+
+.layout-screen {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100dvh;
+  background: #050607;
+  display: none;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  overflow: hidden;
+  z-index: 20;
+}
+
+.layout-screen.is-visible {
+  display: block;
+}
+
+.layout-stripes {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.layout-stripe {
+  flex: 1 1 0;
+  min-height: 0;
+}
+
+.center-tint-anchor {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: var(--logo-side-width);
+  height: var(--tint-logo-height);
+  transform: translateX(-50%);
+  z-index: 1;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.layout-close {
+  position: absolute;
+  left: 50%;
+  bottom: clamp(92px, 7.5dvh, 116px);
+  transform: translateX(-50%);
+  padding: 0;
+  border: 0;
+  width: var(--close-button-size);
+  height: var(--close-button-size);
+  border-radius: 999px;
+  background: transparent;
+  color: #f4f0ff;
+  font-size: var(--close-button-icon-size);
+  line-height: 1;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.fullscreen-close {
+  z-index: 31;
+}
+
+.shared-tint-logo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--logo-side-width);
+  height: auto;
+  max-width: none;
+  z-index: 30;
+  pointer-events: none;
+  opacity: 0;
+  transform-origin: top left;
+}
+
+.shared-tint-logo.is-animated {
+  transition: transform 0.56s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
+}
+
+.fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+/* LOGIN SCREEN */
+.login {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+}
+
+.login h2 {
+  color: white;
+}
+
+.login input {
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  font-size: 16px;
+}
+
+.login button {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  background: white;
+  color: black;
+  cursor: pointer;
+}
+
+@media (max-width: 520px) {
+  :root {
+    --page-padding: 12px;
+    --grid-gap: 8px;
+    --hero-height: clamp(108px, 17dvh, 156px);
+    --logo-side-width: clamp(73px, 16vw, 108px);
+    --tint-logo-height: clamp(43px, 7.6dvh, 62px);
+    --hero-logo-scale: 1.08;
+  }
+
+  .side-logo {
+    max-height: clamp(30px, 5.5dvh, 44px);
+  }
+
+  .client-logo {
+    height: clamp(70px, 11.05dvh, 99px);
+  }
+
+  .subtitle {
+    font-size: clamp(10px, 1.8dvh, 13px);
+  }
+
+  .layout-close {
+    bottom: clamp(88px, 7dvh, 106px);
+  }
+}
+
+@media (max-height: 760px) {
+  :root {
+    --hero-height: clamp(96px, 15dvh, 132px);
+    --hero-logo-scale: 1.05;
+  }
+
+  .subtitle {
+    line-height: 1.1;
+  }
+}

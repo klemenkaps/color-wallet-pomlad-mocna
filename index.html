@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bright Spring</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#000000" id="themeColorMeta">
+  <link rel="apple-touch-icon" href="Images/AppIcon_TintLogo_V1.png">
+</head>
+<body>
+
+<div class="login" id="loginScreen">
+  <h2>Vnesite geslo</h2>
+  <input id="passwordInput" type="password" placeholder="Geslo">
+  <button type="button" onclick="checkPassword()">Odkleni</button>
+</div>
+
+<div id="appContent" style="display: none;">
+  <header class="hero">
+    <div class="side-logo side-logo-left logo-anchor" id="homeTintAnchor" aria-hidden="true"></div>
+    <div class="hero-center">
+      <button class="logo-spin-button" id="logoSpinButton" type="button" aria-label="Animate Hladna Zima logo">
+        <img class="client-logo" id="clientLogo" src="Images/SubSeason_Logo.svg" alt="Hladna Zima logo">
+      </button>
+      <div class="subtitle-group">
+        <p class="subtitle">Vaš osebni barvni vodič.</p>
+        <p class="subtitle subtitle-note">Najlepše zažarite v močnih barvah.</p>
+      </div>
+    </div>
+    <button class="layout-toggle" id="layoutToggle" type="button" aria-label="Open repositioned layout">
+      <img class="side-logo side-logo-right" src="Images/Button_RepositionLayout_V1.svg" alt="Layout button">
+    </button>
+  </header>
+
+  <div class="grid" id="grid"></div>
+
+  <div class="layout-screen" id="layoutScreen">
+    <div class="layout-stripes" id="layoutStripes"></div>
+    <button class="layout-close" id="layoutClose" type="button" aria-label="Close repositioned layout">✕</button>
+  </div>
+
+  <div class="fullscreen" id="fullscreen">
+    <button class="layout-close fullscreen-close" id="close" type="button" aria-label="Close color view">✕</button>
+  </div>
+</div>
+
+<div class="center-tint-anchor" id="centerTintAnchor" aria-hidden="true"></div>
+<img class="shared-tint-logo" id="sharedTintLogo" src="Images/TintLogoSmall_V1.svg" alt="Tint logo">
+
+<script src="script.js"></script>
+<script>
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("service-worker.js", { updateViaCache: "none" });
+}
+</script>
+</body>
+</html>

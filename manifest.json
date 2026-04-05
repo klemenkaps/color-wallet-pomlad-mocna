@@ -1,0 +1,15 @@
+{
+  "name": "Bright Spring",
+  "short_name": "Bright Spring",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#050607",
+  "theme_color": "#000000",
+  "icons": [
+    {
+      "src": "Images/AppIcon_TintLogo_V1.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
